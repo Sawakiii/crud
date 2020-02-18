@@ -24,13 +24,13 @@ mongoose.connect(url, err => {
         console.log(`POST来たよ`)
         console.log(req.body)
         res.send()
-        // new User({
-        //     name: req.body.name,
-        //     email: req.body.email
-        // }).save(err=> {
-        //     if (err) res.status(500)
-        //     res.status(200).send(`${req.body.name}のデータ作ったよ`)
-        // })
+        new User({
+            name: req.body.name,
+            email: req.body.email
+        }).save(err=> {
+            if (err) res.status(500)
+            res.status(200).send(`${req.body.name}のデータ作ったよ`)
+        })
     })
 
 
