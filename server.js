@@ -39,6 +39,23 @@ mongoose.connect(url, err => {
         })
     })
 
+    app.delete("/api/user", (req, res)=>{
+        // req.bodyには直接第二引数に指定したものが入ってくるので、idのみ取り出す
+        const { id } = req.body
+        console.log("削除きたよ")
+        // console.log(id)
+        //  idを見つけて削除を行っている。
+        User.findByIdAndRemove(id, err=>{
+            if (err) res.status(500).send()
+            // userの新しい配列を送る。
+            User.find({}, (err, userArray)=>{
+                if (err) res.status(500).send()
+                res.status(200).send(userArray)
+            })
+
+        })
+    })
+
 
     app.listen(port, err => {
         if (err) {
